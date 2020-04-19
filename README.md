@@ -24,4 +24,4 @@ So far, I have built functionality (purely methods, no interactive side yet) for
  - Dealing the inital 9 cards per player
  - Bidding, in order with the dealer last
  - Finding the winning bid and player
- - Allowing the winner of the bidding to choose suita
+ - Allowing the winner of the bidding to choose suit
