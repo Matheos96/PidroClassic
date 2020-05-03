@@ -6,7 +6,7 @@ public enum Suit { HEARTS(Color.RED),
     CLUBS(Color.BLACK)
     ;
 
-    private Color color;
+    private final Color color;
 
     Suit(Color c) {
         this.color = c;

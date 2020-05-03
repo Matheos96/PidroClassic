@@ -30,6 +30,9 @@ public class Tester {
                 System.out.printf("%s is choosing suit...\n", pidroGame.getWinningBidPlayer());
                 pidroGame.setCurrentSuit(Suit.DIAMONDS);
 
+                pidroGame.popIrrelevantCards();
+                pidroGame.printPlayerCards();
+
             }
 
 

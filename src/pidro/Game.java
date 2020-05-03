@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private Team[] teams;
+    private final Team[] teams;
 
     private Deck deck;
 
@@ -138,21 +138,36 @@ public class Game {
         System.out.printf("%s starts the bidding...\n", getCurrentPlayer());
     }
 
-    boolean bidCurrentPlayerAndNext(int bid) throws IllegalBidException, LastMustBidException {
+    /**
+     * Takes a bid, makes sure the bid is legal, otherwise throws exception. Also makes sure that the last player will
+     * bid if nothing has been bid yet. Finally sets the new leading bid player and changes to next player's turn or to
+     * the final winning bid player if bidding is over.
+     * @param bid amount that is bid for current player
+     * @throws IllegalBidException Thrown if a bid less than 6 or higher than 14 is given (and not equal to zero). Also
+     * thrown in the case of a bid lower than the winning bid is given.
+     * @throws LastMustBidException Thrown when the bidding player is the last player to bid and no one has bid yet and
+     * the he tries to pass.
+     */
+    void bidCurrentPlayerAndNext(int bid) throws IllegalBidException, LastMustBidException {
+        //Illegal bid
         if ((bid != 0 && bid < 6) || bid > 14) {
             throw new IllegalBidException();
         }
+        //Bid is below the leading
         else if (bid <= winningBid && bid != 0) {
-            return false;
+            throw new IllegalBidException();
         }
+        //New leading bid
         else if (bid > winningBid) {
             winningBid = bid;
             winningBidPlayer = currentPlayer;
             System.out.printf("%s bid %d\n", winningBidPlayer, winningBid);
         }
+        //If it got this far and the current player is the last to bid. He has to bid.
         else if (currentPlayer == dealer && winningBid == 0) {
             throw new LastMustBidException();
         }
+        //bid == 0 --> Pass
         else
             System.out.printf("%s passed.\n", currentPlayer);
 
@@ -160,12 +175,11 @@ public class Game {
         bidCount++;
         if(biddingIsDone())
             setCurrentPlayer(winningBidPlayer);
-        return true;
     }
 
     void setCurrentSuit(Suit suit) {
         this.currentSuit = suit;
-        System.out.printf("%s is playing in %s.", currentPlayer, suit);
+        System.out.printf("%s is playing in %s.\n", currentPlayer, suit);
     }
 
     private void refreshDeck() {
@@ -177,6 +191,15 @@ public class Game {
     void sortPlayerCards() {
         for (int i = 0; i < 4 ; i++)
             getPlayerByIdx(i).sortCardsBySuit();
+    }
+
+    void popIrrelevantCards() {
+        for(Team team : teams) {
+            team.getPlayer(0).removeIrrelevantCards(currentSuit);
+            team.getPlayer(1).removeIrrelevantCards(currentSuit);
+        }
+        //The current player set to the dealer because IRL he would not deal the second deal.
+        setCurrentPlayer(dealer);
     }
 
     void nextPlayer() {
