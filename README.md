@@ -26,3 +26,4 @@ So far, I have built functionality (purely methods, no interactive side yet) for
  - Finding the winning bid and player
  - Allowing the winner of the bidding to choose suit
  - Removing all unplayable/irrelevant cards from the players' hands ahead of the final deal
+ - Dealing the second deal ahead of round start

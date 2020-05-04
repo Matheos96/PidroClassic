@@ -122,6 +122,9 @@ public class Game {
         this.deck.poke(amount);
     }
 
+    /**
+     * Performs the first deal of 3*3 cards per player from a newly shuffled deck.
+     */
     void initialDeal() {
         //Deal to all 4 players, three times per player
         Player curr;
@@ -136,6 +139,37 @@ public class Game {
         sortPlayerCards();
         nextPlayer(); //Player after dealer starts bidding
         System.out.printf("%s starts the bidding...\n", getCurrentPlayer());
+    }
+
+    /**
+     * Performs the second deal after the suit has been chosen and irrelevant cards have been thrown away.
+     */
+    void secondDeal() {
+        Player curr;
+        int needed;
+        for(int i = 0; i < 4; i++) {
+            //The dealer deals to the next player from him first
+            nextPlayer();
+            curr = getCurrentPlayer();
+            //If this is the dealer, give the rest of the cards
+            if(curr == dealer) {
+                while(!deck.isEmpty())
+                    curr.giveCard(deck.popTopCard());
+            }
+            //Otherwise, give as many as needed.
+            else {
+                needed = curr.needCards();
+                for(int j = 0; j < needed; j++)
+                    curr.giveCard(deck.popTopCard());
+            }
+
+        }
+
+        //Sort the cards for all players
+        sortPlayerCards();
+
+        //Set the current player to the player who won the bidding. He starts.
+        setCurrentPlayer(winningBidPlayer);
     }
 
     /**
@@ -193,11 +227,14 @@ public class Game {
             getPlayerByIdx(i).sortCardsBySuit();
     }
 
+    /**
+     * Removes all irrelevant cards from all the players' hands. Done after suit has been chosen.
+     */
     void popIrrelevantCards() {
-        for(Team team : teams) {
-            team.getPlayer(0).removeIrrelevantCards(currentSuit);
-            team.getPlayer(1).removeIrrelevantCards(currentSuit);
-        }
+        for(Team team : teams)
+            for(int i = 0; i <= 1; i++)
+                team.getPlayer(i).removeIrrelevantCards(currentSuit);
+
         //The current player set to the dealer because IRL he would not deal the second deal.
         setCurrentPlayer(dealer);
     }

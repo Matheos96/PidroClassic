@@ -31,6 +31,7 @@ public class Tester {
                 pidroGame.setCurrentSuit(Suit.DIAMONDS);
 
                 pidroGame.popIrrelevantCards();
+                pidroGame.secondDeal();
                 pidroGame.printPlayerCards();
 
             }

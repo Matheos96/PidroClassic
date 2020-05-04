@@ -59,6 +59,12 @@ public class Player {
         return this.cards.toString();
     }
 
+    /**
+     * Calculates and returns the cards needed in order to get the required six cards during the second deal.
+     * @return cards needed to reach six
+     */
+    int needCards() { return 6 - this.cards.size(); }
+
     @Override
     public String toString() {
         return name;
