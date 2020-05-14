@@ -7,11 +7,11 @@ import java.util.List;
 
 public class Team {
 
-    private TeamName teamName;
+    private final TeamName teamName;
 
-    private Player[] members;
+    private final Player[] members;
 
-    private List<Integer> points;
+    private final List<Integer> points;
 
     Team(TeamName teamName) {
         this.teamName = teamName;

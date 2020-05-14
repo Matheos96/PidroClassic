@@ -11,10 +11,10 @@ public class Tester {
     public static void main(String[] args) {
         Game pidroGame = new Game();
         try {
-            pidroGame.joinTeam("vi", "Matheos");
-            pidroGame.joinTeam("vi", "Daniel");
-            pidroGame.joinTeam("de", "Erik");
-            pidroGame.joinTeam("de", "Matts");
+            pidroGame.joinTeam(TeamName.WE, "Matheos");
+            pidroGame.joinTeam(TeamName.WE, "Daniel");
+            pidroGame.joinTeam(TeamName.THEY, "Erik");
+            pidroGame.joinTeam(TeamName.THEY, "Matts");
 
             pidroGame.findInitDealer();
             System.out.printf("%s buckar...\n", pidroGame.getPreviousPlayer());

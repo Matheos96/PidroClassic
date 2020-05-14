@@ -36,9 +36,9 @@ public class Game {
         teams = new Team[]{new Team(TeamName.WE), new Team(TeamName.THEY)};
     }
 
-    void joinTeam(String team, String playerName) throws TeamIsFullException {
+    void joinTeam(TeamName team, String playerName) throws TeamIsFullException {
         Player newPlayer = new Player(playerName);
-        if(team.toLowerCase().equals("vi")) {
+        if(team == TeamName.WE) {
             teams[0].addPlayer(newPlayer);
             System.out.printf("%s joined the table into team %s!\n", newPlayer, teams[0]);
         }
@@ -158,7 +158,7 @@ public class Game {
             }
             //Otherwise, give as many as needed.
             else {
-                needed = curr.needCards();
+                needed = curr.neededCards();
                 for(int j = 0; j < needed; j++)
                     curr.giveCard(deck.popTopCard());
             }
