@@ -22,6 +22,8 @@
 
 out/
 
+lib/
+
 # Compiled class file
 *.class
 

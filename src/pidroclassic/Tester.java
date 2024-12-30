@@ -1,0 +1,49 @@
+package pidroclassic;
+
+import pidroclassic.deck.card.Suit;
+import pidroclassic.exception.GameNotReadyException;
+import pidroclassic.exception.IllegalBidException;
+import pidroclassic.exception.LastMustBidException;
+import pidroclassic.exception.TeamIsFullException;
+
+public class Tester {
+
+    public static void main(String[] args) {
+        Game pidroGame = new Game();
+        try {
+            pidroGame.joinTeam(TeamName.WE, "Matheos");
+            pidroGame.joinTeam(TeamName.WE, "Daniel");
+            pidroGame.joinTeam(TeamName.THEY, "Erik");
+            pidroGame.joinTeam(TeamName.THEY, "Matts");
+
+            pidroGame.findInitDealer();
+            System.out.printf("%s buckar...\n", pidroGame.getPreviousPlayer());
+            pidroGame.splitDeck(2);
+            pidroGame.initialDeal();
+            pidroGame.printPlayerCards();
+
+            pidroGame.bidCurrentPlayerAndNext(6);
+            pidroGame.bidCurrentPlayerAndNext(0);
+            pidroGame.bidCurrentPlayerAndNext(9);
+            pidroGame.bidCurrentPlayerAndNext(0);
+            if (pidroGame.biddingIsDone()) {
+                System.out.printf("%s is choosing suit...\n", pidroGame.getWinningBidPlayer());
+                pidroGame.setCurrentSuit(Suit.DIAMONDS);
+
+                pidroGame.popIrrelevantCards();
+                pidroGame.secondDeal();
+                pidroGame.printPlayerCards();
+
+            }
+
+
+        }
+        catch (TeamIsFullException | GameNotReadyException e) {
+            System.out.println(e);
+        } catch (LastMustBidException | IllegalBidException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}

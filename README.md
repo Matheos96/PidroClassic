@@ -14,13 +14,13 @@ When and if this game reaches a playable state in the future, it will be complet
 
 ## Current state
 Currently, not a lot has been finished. I have made simple test server and clients with no association to the game, just to get an idea of what will be needed later on. 
-I have created a *Deck* class that makes up a deck of cards with all the suits and their values. Cards can be drawn from the top of this deck, it can be shuffled and regenerated. The aim here is to replicate a real-life deck of cards as well as possible. The Deck holds a *Stack* of *Cards*. *Card* is another class I have created which holds the *Suit* (enum) and *CardValue* (enum) of the card it represents. Cards can easily be compared to each other since the Card class implements the Comparable interface. The cards can also be sorted by value and then by suit, using the implemented *cardSortComparator*
-Apart from the deck we also have a Game class. The Game class aims to be the center of the server-to-be side. It keeps track of the current deck, the *Teams* and its *Players*. It also keeps track of whose turn it is and in what phase of the game we currently are. 
+I have created a *Deck* class that makes up a pidroclassic.deck of cards with all the suits and their values. Cards can be drawn from the top of this pidroclassic.deck, it can be shuffled and regenerated. The aim here is to replicate a real-life pidroclassic.deck of cards as well as possible. The Deck holds a *Stack* of *Cards*. *Card* is another class I have created which holds the *Suit* (enum) and *CardValue* (enum) of the card it represents. Cards can easily be compared to each other since the Card class implements the Comparable interface. The cards can also be sorted by value and then by suit, using the implemented *cardSortComparator*
+Apart from the pidroclassic.deck we also have a Game class. The Game class aims to be the center of the server-to-be side. It keeps track of the current pidroclassic.deck, the *Teams* and its *Players*. It also keeps track of whose turn it is and in what phase of the game we currently are. 
 So far, I have built functionality (purely methods, no interactive side yet) for:
 
  - Joining teams
- - Finding the intial dealer based on traditional drawing of cards followed by reshuffling of the deck
- - Allowing the player to the right of the dealer to split the deck after the "dealer" has shuffled
+ - Finding the intial dealer based on traditional drawing of cards followed by reshuffling of the pidroclassic.deck
+ - Allowing the player to the right of the dealer to split the pidroclassic.deck after the "dealer" has shuffled
  - Dealing the inital 9 cards per player
  - Bidding, in order with the dealer last
  - Finding the winning bid and player
